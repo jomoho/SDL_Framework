@@ -1,0 +1,63 @@
+/*
+ * App.h
+ *
+ *  Created on: Aug 24, 2013
+ *      Author: Moritz Laass
+ */
+
+#ifndef APP_H_
+#define APP_H_
+
+#include <vector>
+#include <iostream>
+#include "RendererSDL.h"
+#include "TextElement.h"
+#include "AppState.h"
+
+#define APP_TITLE "FRAMEWORK DEMO"
+#define APP_WIDTH 640
+#define APP_HEIGHT 480
+
+using namespace std;
+
+class App {
+	
+private:
+	void loadFonts();
+	void freeFonts();
+
+	SDL_Texture * loadTexture(const string &filename);
+
+	void loadTextures();
+	void freeTextures();
+
+
+	void switchNextState();
+	void drawDebug();
+
+
+	vector<string> bp_textures;
+
+	int next_state;
+public:
+	App();
+	virtual ~App();
+	static App *instance ;
+	static App *get();
+	static void destroyInstance();
+
+	void run();
+	void start();
+
+	void nextState(int branch = 0);
+	AppState *state;
+	RendererSDL *ren;
+	bool quit, debug;
+
+	vector<TTF_Font *> fonts;
+	vector<SDL_Texture *> textures;
+
+	static SDL_Color black, white;
+};
+
+#endif /* APP_H_ */
