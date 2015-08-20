@@ -26,7 +26,7 @@ class Text {
 public:
 	Text();
 	Text(const string &text, SDL_Color color, int font_id = 0,
-			TextRenderType type = TXT_BLIT);
+         TextRenderType type = TXT_BLEND);
 	virtual ~Text();
 
 	void drawLeft(int x, int y, double scale = 1.0, double angle = 0);

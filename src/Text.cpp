@@ -98,9 +98,8 @@ void Text::updateTexture() {
 	if (tex != 0) {
 		SDL_DestroyTexture(tex);
 	}
-	//TODO: color
-	SDL_Color color = { 255, 255, 255 };
-	TTF_Font * font = App::get()->fonts[font_id];
+
+    TTF_Font *font = App::get()->fonts[font_id];
 	SDL_Surface * srf = 0;
 
 	if (type == TXT_BLEND) {

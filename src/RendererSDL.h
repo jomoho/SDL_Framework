@@ -34,7 +34,7 @@ using namespace std;
 
 class RendererSDL {
 public:
-	RendererSDL(const string& title, Uint32 width, Uint32 height, Uint32 fps, bool fullscreen = false);
+    RendererSDL(const string &title, Uint32 width, Uint32 height, bool fullscreen = false);
 	virtual ~RendererSDL();
 
 	void startFrame();
@@ -46,12 +46,16 @@ public:
 	SDL_Window *window;
 	SDL_Renderer *renderer;
 	Uint32 frames, width, height;
-	int tick_diff, droped_frames;
+
+    double getFps() const {
+        return fps;
+    }
+
     double time, deltaTime, lastTime;
 private:
     std::chrono::high_resolution_clock::time_point t_now, t_last, t_start;
-	Uint32 last_ticks, fps, tick_interval;
 	string title;
+    double fps;
 };
 
 #endif /* RENDERERSDL_H_ */

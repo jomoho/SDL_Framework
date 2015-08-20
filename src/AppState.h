@@ -21,7 +21,7 @@ class App;
 class AppState {
 	friend class App; 	
 protected:
-	uint timer;
+    double timer;
 public:
 	std::string name;
 	virtual AppState * getNext(int branch);

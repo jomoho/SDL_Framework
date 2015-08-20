@@ -8,20 +8,20 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
-#include <string>
 #include <iterator>
 #include <typeinfo>
 #include <iomanip>
 #include "stringtools.h"
 
 #include "App.h"
-#include "Log.h"
 
-#include "SDL2/SDL_image.h"
 #include "Text.h"
 
 SDL_Color App::black = { 0, 0, 0 };
 SDL_Color App::white = { 255, 255, 255 };
+SDL_Color App::red = {255, 0, 0};
+SDL_Color App::green = {0, 255, 0};
+SDL_Color App::blue = {0, 0, 255};
 
 #define _DEBUG 1
 App::App() {
@@ -36,7 +36,7 @@ App::App() {
 	FILE* log_fd = fopen("logfile.txt", "w");
 	Output2FILE::Stream() = log_fd;
 
-	ren = new RendererSDL(APP_TITLE, APP_WIDTH, APP_HEIGHT, 60);
+    ren = new RendererSDL(APP_TITLE, APP_WIDTH, APP_HEIGHT);
 	quit = false;
 	next_state = 0;
 	state = nullptr;
@@ -115,7 +115,9 @@ Texture * App::loadTexture(const string &filename) {
 	srf = IMG_Load_RW(SDL_RWFromFile(filename.c_str(), "rb"), 1);
 	if (!srf) {
 		FILE_LOG(logERROR) << "loadTexture Error: " << IMG_GetError();
-	}
+    } else {
+        FILE_LOG(logDEBUG3) << "Texture loaded: " << filename;
+    }
 	Texture * tex;
 	tex = SDL_CreateTextureFromSurface(ren->renderer, srf);
 
@@ -135,18 +137,14 @@ void App::freeTextures() {
 	}
 	textures.empty();
 }
-int last_fps = 30;
 void App::drawDebug(){
-	int fps = 1000/MAX(ren->tick_diff, 1);
 	stringstream s;
-	s   << std::setprecision(4)
-        <<"Frames: " << ren->frames << "/" << ren->droped_frames
+    s << std::setprecision(2)
+    << "Frames: " << ren->frames
         <<" Time:" << ren->time
-        <<" FPS: " << (last_fps + fps)*0.5;
+    << " FPS: " << ren->getFps();
 	Text txt(s.str(), white);
 	txt.drawLeft(16, 16, 1.0);
-
-	last_fps = fps;
 }
 void App::run() {
 	SDL_Event event;
@@ -168,7 +166,7 @@ void App::run() {
 	ren->endFrame();
 
 	if(state){
-		state->timer += ren->tick_diff;
+        state->timer += ren->deltaTime;
 		if (next_state > 0) {
 			switchNextState();
 		}

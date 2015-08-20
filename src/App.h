@@ -70,7 +70,7 @@ public:
 	vector<TTF_Font *> fonts;
 	vector<Texture *> textures;
 
-	static SDL_Color black, white;
+    static SDL_Color black, white, red, green, blue;
 };
 
 #endif /* APP_H_ */

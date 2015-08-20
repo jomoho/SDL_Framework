@@ -6,16 +6,12 @@
  */
 
 #include "RendererSDL.h"
-#include <iostream>
-#include <chrono>
-#include <GL/gl.h>
 
-RendererSDL::RendererSDL(const string& title, Uint32 width, Uint32 height, Uint32 fps, bool fullscreen) {
+RendererSDL::RendererSDL(const string &title, Uint32 width, Uint32 height, bool fullscreen) {
     frames = 0;
     this->width = width;
     this->height = height;
     this->title = string(title);
-    this->fps = fps;
 
     t_start = std::chrono::high_resolution_clock::now();
     t_now = std::chrono::high_resolution_clock::now();
@@ -49,9 +45,6 @@ RendererSDL::RendererSDL(const string& title, Uint32 width, Uint32 height, Uint3
     if (renderer == NULL){
         FILE_LOG(logWARNING) << "SDL_CreateRenderer Error: " << SDL_GetError() << endl;
     }
-    last_ticks = SDL_GetTicks();
-    tick_interval = 1000/fps;
-    tick_diff = tick_interval;
 }
 
 RendererSDL::~RendererSDL() {
@@ -83,12 +76,9 @@ void RendererSDL::endFrame() {
     deltaTime =std::chrono::duration<double>(t_now-t_last).count();
     time = std::chrono::duration<double>(t_now-t_start).count();
     lastTime = std::chrono::duration<double>(t_last-t_start).count();
-
-    tick_diff = (int) SDL_GetTicks() - last_ticks;
-
-    if(tick_diff > 0){
-        SDL_Delay(tick_diff);
+    if (deltaTime != 0.0) {
+        fps = 1.0 / deltaTime;
     }
+    //fpsBuf[frames % 32] = fps;
     frames += 1;
-    last_ticks = SDL_GetTicks();
 }
