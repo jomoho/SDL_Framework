@@ -19,10 +19,15 @@
 #define RENDERERSDL_H_
 
 #include <string>
+#include <chrono>
 #include "Log.h"
 
 #define MIN(a,b) (((a)<(b))?(a):(b))
 #define MAX(a,b) (((a)>(b))?(a):(b))
+
+typedef SDL_Point Point;
+typedef SDL_Rect Rect;
+typedef SDL_Texture Texture;
 
 
 using namespace std;
@@ -42,7 +47,9 @@ public:
 	SDL_Renderer *renderer;
 	Uint32 frames, width, height;
 	int tick_diff, droped_frames;
+    double time, deltaTime, lastTime;
 private:
+    std::chrono::high_resolution_clock::time_point t_now, t_last, t_start;
 	Uint32 last_ticks, fps, tick_interval;
 	string title;
 };

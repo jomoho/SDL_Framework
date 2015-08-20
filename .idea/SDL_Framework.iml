@@ -7,13 +7,13 @@
       <sourceFolder url="file://$MODULE_DIR$/src/App.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/AppState.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/AppState.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/GuiElement.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/GuiElement.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/Log.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/RendererSDL.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/RendererSDL.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/TextElement.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/TextElement.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sprite.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Sprite.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Text.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Text.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main.cpp" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />

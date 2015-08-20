@@ -11,16 +11,19 @@
 #include <string>
 #include <iterator>
 #include <typeinfo>
+#include <iomanip>
 #include "stringtools.h"
 
 #include "App.h"
 #include "Log.h"
 
 #include "SDL2/SDL_image.h"
+#include "Text.h"
 
 SDL_Color App::black = { 0, 0, 0 };
 SDL_Color App::white = { 255, 255, 255 };
 
+#define _DEBUG 1
 App::App() {
 #ifdef _DEBUG
 	debug = true;
@@ -36,17 +39,19 @@ App::App() {
 	ren = new RendererSDL(APP_TITLE, APP_WIDTH, APP_HEIGHT, 60);
 	quit = false;
 	next_state = 0;
-	state = NULL;
+	state = nullptr;
 
 	// load support for PNG images
 	int flags = IMG_INIT_PNG;
-	int initted = IMG_Init(flags);
-	if ((initted & flags) != flags) {
+	int inited = IMG_Init(flags);
+	if ((inited & flags) != flags) {
 		FILE_LOG(logWARNING) << "Error initializing SDL_image" << IMG_GetError();
 	}
 
-	loadFonts();
-	loadTextures();
+    loadFonts();
+    FILE_LOG(logDEBUG) << "Fonts Loaded!";
+    loadTextures();
+    FILE_LOG(logDEBUG) << "Textures Loaded!";
 
 	IMG_Quit();
 }
@@ -79,24 +84,22 @@ void App::destroyInstance() {
 
 void App::start(){
 
+    state = new AppState();
 }
 
 void App::loadFonts() {
-	TTF_Init();
-	TTF_Font *font;
-	font = TTF_OpenFont("fonts/DroidSansMono.ttf", 12);
-	if (font == NULL) {
-		FILE_LOG(logERROR) << "TTF_OpenFont Error: " << TTF_GetError();
-	} else {
-		fonts.push_back(font);
-	}
+    TTF_Init();
+    TTF_Font *font;
 
-	font = TTF_OpenFont("fonts/DroidSansMono.ttf", 16);
-	if (font == NULL) {
-		FILE_LOG(logERROR) << "TTF_OpenFont Error: " << TTF_GetError();
-	} else {
-		fonts.push_back(font);
-	}
+    for(auto it = fontDefinitions.begin(); it != fontDefinitions.end(); ++it){
+        font = TTF_OpenFont(it->filename.c_str(), it->size);
+        if(font == NULL){
+            FILE_LOG(logERROR)  << "TTF_OpenFont Error: " << TTF_GetError();
+        }else{
+            FILE_LOG(logDEBUG)  << "Font Loaded: " << it->filename.c_str();
+            fonts.push_back(font);
+        }
+    }
 }
 
 void App::freeFonts() {
@@ -107,13 +110,13 @@ void App::freeFonts() {
 	TTF_Quit();
 }
 
-SDL_Texture * App::loadTexture(const string &filename) {
+Texture * App::loadTexture(const string &filename) {
 	SDL_Surface *srf;
 	srf = IMG_Load_RW(SDL_RWFromFile(filename.c_str(), "rb"), 1);
 	if (!srf) {
 		FILE_LOG(logERROR) << "loadTexture Error: " << IMG_GetError();
 	}
-	SDL_Texture * tex;
+	Texture * tex;
 	tex = SDL_CreateTextureFromSurface(ren->renderer, srf);
 
 	SDL_FreeSurface(srf);
@@ -121,11 +124,13 @@ SDL_Texture * App::loadTexture(const string &filename) {
 }
 
 void App::loadTextures() {
-
+    for(auto it = textureDefinitions.begin(); it != textureDefinitions.end(); ++it){
+        textures.push_back(loadTexture(*it));
+    }
 }
 
 void App::freeTextures() {
-	for (vector<SDL_Texture*>::size_type i = 0; i < textures.size(); ++i) {
+	for (vector<Texture*>::size_type i = 0; i < textures.size(); ++i) {
 		SDL_DestroyTexture(textures[i]);
 	}
 	textures.empty();
@@ -134,13 +139,15 @@ int last_fps = 30;
 void App::drawDebug(){
 	int fps = 1000/MAX(ren->tick_diff, 1);
 	stringstream s;
-	s <<"Frames: " << ren->frames << "/" << ren->droped_frames <<" fps: " << (last_fps + fps)*0.5 ;
-	TextElement txt(s.str(), white);
+	s   << std::setprecision(4)
+        <<"Frames: " << ren->frames << "/" << ren->droped_frames
+        <<" Time:" << ren->time
+        <<" FPS: " << (last_fps + fps)*0.5;
+	Text txt(s.str(), white);
 	txt.drawLeft(16, 16, 1.0);
 
 	last_fps = fps;
 }
-
 void App::run() {
 	SDL_Event event;
 	while (SDL_PollEvent(&event)) {

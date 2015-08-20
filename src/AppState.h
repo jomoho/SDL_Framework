@@ -7,16 +7,24 @@
 
 #ifndef APPSTATE_H_
 #define APPSTATE_H_
+#ifdef _MSC_VER
+#include "SDL_ttf.h"
+#else
+#include "SDL2/SDL_ttf.h"
+#endif
+
+#include <string>
+#include "RendererSDL.h"
 
 class App;
 
 class AppState {
 	friend class App; 	
 protected:
-	Uint32 timer;
+	uint timer;
 public:
-	string name, instruction;
-	virtual AppState * getNext(int branch) = 0;
+	std::string name;
+	virtual AppState * getNext(int branch);
 	AppState();
 	virtual ~AppState();
 	virtual void draw();

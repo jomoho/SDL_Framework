@@ -11,7 +11,6 @@
 #include <vector>
 #include <iostream>
 #include "RendererSDL.h"
-#include "TextElement.h"
 #include "AppState.h"
 
 #define APP_TITLE "FRAMEWORK DEMO"
@@ -20,13 +19,30 @@
 
 using namespace std;
 
-class App {
+struct FontDef{
+    string filename;
+    int size;
+};
+
+
+class App{
+   vector<FontDef> fontDefinitions =
+            vector<FontDef>({
+                                    {"fonts/DroidSansMono.ttf", 12},
+                                    {"fonts/DroidSansMono.ttf", 16},
+                                    {"fonts/MostlyMono.ttf", 14}
+    });
+
+    vector<string> textureDefinitions =
+            vector<string>({
+                                   "gfx/demo.png"
+    });
 	
 private:
 	void loadFonts();
 	void freeFonts();
 
-	SDL_Texture * loadTexture(const string &filename);
+	Texture * loadTexture(const string &filename);
 
 	void loadTextures();
 	void freeTextures();
@@ -34,9 +50,6 @@ private:
 
 	void switchNextState();
 	void drawDebug();
-
-
-	vector<string> bp_textures;
 
 	int next_state;
 public:
@@ -55,7 +68,7 @@ public:
 	bool quit, debug;
 
 	vector<TTF_Font *> fonts;
-	vector<SDL_Texture *> textures;
+	vector<Texture *> textures;
 
 	static SDL_Color black, white;
 };
