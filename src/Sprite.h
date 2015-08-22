@@ -6,7 +6,7 @@
 #define SDL_FRAMEWORK_SPRITE_H
 
 #include "RendererSDL.h"
-typedef uint16_t uint;
+typedef Uint32 uint;
 struct DrawMod {
     uint8_t r,g,b, alpha;
     SDL_BlendMode blend;

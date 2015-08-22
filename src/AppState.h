@@ -15,6 +15,7 @@
 
 #include <string>
 #include "RendererSDL.h"
+#include "Scene.h"
 
 class App;
 
@@ -23,6 +24,7 @@ class AppState {
 protected:
     double timer;
 public:
+    Scene s;
 	std::string name;
 	virtual AppState * getNext(int branch);
 	AppState();
