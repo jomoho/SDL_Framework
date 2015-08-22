@@ -9,6 +9,7 @@
 #include "Text.h"
 
 AppState::AppState(): timer(0){
+    App::get()->audio.playMusic(0);
 }
 
 AppState::~AppState() {
@@ -32,7 +33,16 @@ void AppState::next(int branch){
 	App::get()->nextState(branch);
 }
 void AppState::pump(const SDL_Event &event){
-
+    if( event.type == SDL_KEYDOWN )
+    {
+        //Select surfaces based on key press
+        switch( event.key.keysym.sym )
+        {
+            case SDLK_UP:
+            App::get()->audio.play(0);
+               break;
+        }
+    }
 }
 
 AppState *AppState::getNext(int branch) {

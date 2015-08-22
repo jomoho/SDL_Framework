@@ -145,7 +145,7 @@ inline std::string NowTime()
 
     char result[100] = {0};
     static DWORD first = GetTickCount();
-    sprintf_s(result, "%s.%03ld", buffer, (long)(GetTickCount() - first) % 1000); 
+    snprintf(result, 100, "%s.%03ld", buffer, (long)(GetTickCount() - first) % 1000);
     return result;
 }
 

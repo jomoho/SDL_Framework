@@ -12,6 +12,7 @@
 #include <iostream>
 #include "RendererSDL.h"
 #include "AppState.h"
+#include "Audio.h"
 
 #define APP_TITLE "FRAMEWORK DEMO"
 #define APP_WIDTH 640
@@ -67,6 +68,7 @@ public:
 	RendererSDL *ren;
 	bool quit, debug;
 
+	Audio audio;
 	vector<TTF_Font *> fonts;
 	vector<Texture *> textures;
 

@@ -1,0 +1,29 @@
+# CMake generation dependency list for this directory.
+C:/Users/moritz/workspace/SDL_Framework/CMakeLists.txt
+C:/Users/moritz/workspace/SDL_Framework/build/CMakeFiles/3.2.2/CMakeSystem.cmake
+c:/Program Files (x86)/CMake/share/cmake-3.2/Modules/CMakeSystemSpecificInitialize.cmake
+C:/Users/moritz/workspace/SDL_Framework/build/CMakeFiles/3.2.2/CMakeCCompiler.cmake
+C:/Users/moritz/workspace/SDL_Framework/build/CMakeFiles/3.2.2/CMakeCXXCompiler.cmake
+c:/Program Files (x86)/CMake/share/cmake-3.2/Modules/CMakeSystemSpecificInformation.cmake
+c:/Program Files (x86)/CMake/share/cmake-3.2/Modules/CMakeGenericSystem.cmake
+c:/Program Files (x86)/CMake/share/cmake-3.2/Modules/Platform/Windows.cmake
+c:/Program Files (x86)/CMake/share/cmake-3.2/Modules/Platform/WindowsPaths.cmake
+c:/Program Files (x86)/CMake/share/cmake-3.2/Modules/CMakeCInformation.cmake
+c:/Program Files (x86)/CMake/share/cmake-3.2/Modules/Platform/Windows-MSVC-C.cmake
+c:/Program Files (x86)/CMake/share/cmake-3.2/Modules/Platform/Windows-MSVC.cmake
+C:/Users/moritz/workspace/SDL_Framework/build/CMakeFiles/3.2.2/CMakeRCCompiler.cmake
+c:/Program Files (x86)/CMake/share/cmake-3.2/Modules/CMakeRCInformation.cmake
+c:/Program Files (x86)/CMake/share/cmake-3.2/Modules/CMakeCommonLanguageInclude.cmake
+c:/Program Files (x86)/CMake/share/cmake-3.2/Modules/CMakeCXXInformation.cmake
+c:/Program Files (x86)/CMake/share/cmake-3.2/Modules/Compiler/MSVC-CXX.cmake
+c:/Program Files (x86)/CMake/share/cmake-3.2/Modules/Platform/Windows-MSVC-CXX.cmake
+c:/Program Files (x86)/CMake/share/cmake-3.2/Modules/Platform/Windows-MSVC.cmake
+c:/Program Files (x86)/CMake/share/cmake-3.2/Modules/CMakeCommonLanguageInclude.cmake
+c:/Program Files (x86)/CMake/share/cmake-3.2/Modules/FindPkgConfig.cmake
+c:/Program Files (x86)/CMake/share/cmake-3.2/Modules/FindPackageHandleStandardArgs.cmake
+c:/Program Files (x86)/CMake/share/cmake-3.2/Modules/FindPackageMessage.cmake
+c:/Program Files (x86)/CMake/share/cmake-3.2/Modules/CMakeParseArguments.cmake
+c:/Program Files (x86)/CMake/share/cmake-3.2/Modules/FindOpenGL.cmake
+c:/Program Files (x86)/CMake/share/cmake-3.2/Modules/FindPackageHandleStandardArgs.cmake
+c:/Program Files (x86)/CMake/share/cmake-3.2/Modules/FindPackageMessage.cmake
+c:/Program Files (x86)/CMake/share/cmake-3.2/Modules/CMakeParseArguments.cmake

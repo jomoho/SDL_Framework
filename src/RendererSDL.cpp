@@ -17,7 +17,7 @@ RendererSDL::RendererSDL(const string &title, Uint32 width, Uint32 height, bool 
     t_now = std::chrono::high_resolution_clock::now();
     t_last = std::chrono::high_resolution_clock::now();
 
-    if(SDL_Init(SDL_INIT_VIDEO) < 0){
+    if(SDL_Init(SDL_INIT_VIDEO| SDL_INIT_AUDIO) < 0){
         FILE_LOG(logWARNING) << "SDL_Init Error: " << SDL_GetError() << endl;
     }
 

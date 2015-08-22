@@ -1,0 +1,3 @@
+C:/Users/moritz/workspace/SDL_Framework/build/CMakeFiles/SDL_Framework.dir
+C:/Users/moritz/workspace/SDL_Framework/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/moritz/workspace/SDL_Framework/build/CMakeFiles/ZERO_CHECK.dir

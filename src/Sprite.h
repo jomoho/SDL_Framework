@@ -6,7 +6,7 @@
 #define SDL_FRAMEWORK_SPRITE_H
 
 #include "RendererSDL.h"
-
+typedef uint16_t uint;
 struct DrawMod {
     uint8_t r,g,b, alpha;
     SDL_BlendMode blend;
@@ -17,6 +17,7 @@ private:
     DrawMod mod;
     void applyMod(Texture *tex);
 public:
+
     uint textureId;
     Rect srcRect;
     Point pivot;

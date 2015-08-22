@@ -40,6 +40,7 @@ App::App() {
 	quit = false;
 	next_state = 0;
 	state = nullptr;
+	audio.init();
 
 	// load support for PNG images
 	int flags = IMG_INIT_PNG;
@@ -52,6 +53,8 @@ App::App() {
     FILE_LOG(logDEBUG) << "Fonts Loaded!";
     loadTextures();
     FILE_LOG(logDEBUG) << "Textures Loaded!";
+	audio.loadFiles();
+	FILE_LOG(logDEBUG) << "Audio Loaded!";
 
 	IMG_Quit();
 }
