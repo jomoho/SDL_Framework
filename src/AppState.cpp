@@ -13,6 +13,7 @@
 
 AppState::AppState(): timer(0){
     App::get()->audio.playMusic(0);
+    s.debugDraw.camera = Camera(App::get()->ren->width, App::get()->ren->height);
 
     // Define the ground body.
     b2BodyDef groundBodyDef;
@@ -28,6 +29,7 @@ AppState::AppState(): timer(0){
 
     // The extents are the half-widths of the box.
     groundBox.SetAsBox(50.0f, 10.0f);
+
 
     // Add the ground fixture to the ground body.
     groundBody->CreateFixture(&groundBox, 0.0f);
@@ -66,15 +68,12 @@ void AppState::draw(){
 	Sprite spr(0);
     spr.pivot ={150,250};
     spr.angle = r->time*6;
-//    spr.draw(r->width/2,r->height/2);
+    spr.draw(r->width/2,r->height/2);
 
     Text t("Some Text!!!", {0, 150, 255});
 
     t.drawCenter(r->width / 2, r->height / 4, 2.0);
 
-
-    //ellipseRGBA(App::get()->ren->renderer,30, 30, 60, 90, 255,255,255,255);
-   //ellipseRGBA(App::get()->ren->renderer,10, 10, 30, 20, 0,0,0,255);
 
     s.update(r->deltaTime);
     s.world->DrawDebugData();

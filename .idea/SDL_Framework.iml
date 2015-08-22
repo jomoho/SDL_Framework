@@ -3,13 +3,14 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/cmake_modules/FindSDL2_gfx.cmake" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/App.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/App.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/AppState.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/AppState.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/Audio.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/Audio.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Camera.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Camera.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/Log.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/RendererSDL.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/RendererSDL.h" isTestSource="false" />

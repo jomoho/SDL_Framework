@@ -11,7 +11,8 @@ void SDLDebugDraw::DrawPolygon(const b2Vec2 *vertices, int32 vertexCount, const 
     Sint16 y[vertexCount];
     for(int i = 0; i < vertexCount; ++i){
         b2Vec2 v = vertices[i]; //((vertices[i] + camera.wpos)*camera.getScale()) ;
-        v*=30.f;
+        v *= camera;
+        
         x[i] = (Sint16) v.x;
         y[i] = (Sint16) v.y;
     }
@@ -26,7 +27,8 @@ void SDLDebugDraw::DrawSolidPolygon(const b2Vec2 *vertices, int32 vertexCount, c
     Sint16 y[vertexCount];
     for(int i = 0; i < vertexCount; ++i){
         b2Vec2 v = vertices[i]; //((vertices[i] + camera.wpos)*camera.getScale()) ;
-        v*=30.f;
+        v *= camera;
+        
         x[i] = (Sint16) v.x;
         y[i] = (Sint16) v.y;
     }
@@ -42,7 +44,8 @@ void SDLDebugDraw::DrawCircle(const b2Vec2 &center, float32 radius, const b2Colo
     Sint16 y;
 
     b2Vec2 v = center; //((vertices[i] + camera.wpos)*camera.getScale()) ;
-    v*=30.f;
+    v*= camera;
+    
     x = (Sint16) v.x;
     y = (Sint16) v.y;
 
@@ -54,7 +57,8 @@ void SDLDebugDraw::DrawSolidCircle(const b2Vec2 &center, float32 radius, const b
     Sint16 y;
 
     b2Vec2 v = center; //((vertices[i] + camera.wpos)*camera.getScale()) ;
-    v*=30.f;
+    v*= camera;
+    
     x = (Sint16) v.x;
     y = (Sint16) v.y;
 
@@ -63,15 +67,16 @@ void SDLDebugDraw::DrawSolidCircle(const b2Vec2 &center, float32 radius, const b
 
 void SDLDebugDraw::DrawSegment(const b2Vec2 &p1, const b2Vec2 &p2, const b2Color &color) {
     b2Vec2 v1 = p1, v2 = p2;
-    v1*=30.f;
-    v2*=30.f;
+    v1*= camera;
+    v2*= camera;
 
     lineRGBA(App::get()->ren->renderer,v1.x, v1.y, v2.x,v2.y, color.r, color.g, color.b, color.a);
 }
 
 void SDLDebugDraw::DrawTransform(const b2Transform &xf) {
     b2Vec2 v1 = xf.p;
-    v1*=30.f;
+    v1*= camera;
+    
     pixelRGBA(App::get()->ren->renderer,v1.x, v1.y, 255,255,255,255);
 }
 

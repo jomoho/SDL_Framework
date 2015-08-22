@@ -6,8 +6,11 @@
 #define SDL_FRAMEWORK_SDLDEBUGDRAW_H
 
 #include <Box2D/Box2D.h>
+#include "Camera.h"
 
 class SDLDebugDraw : public b2Draw {
+public:
+    Camera camera;
     void DrawPolygon(const b2Vec2* vertices, int32 vertexCount, const b2Color& color);
     void DrawSolidPolygon(const b2Vec2* vertices, int32 vertexCount, const b2Color& color);
     void DrawCircle(const b2Vec2& center, float32 radius, const b2Color& color);
