@@ -48,7 +48,6 @@ private:
 	void loadTextures();
 	void freeTextures();
 
-
 	void switchNextState();
 	void drawDebug();
 

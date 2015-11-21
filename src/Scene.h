@@ -5,7 +5,7 @@
 #ifndef SDL_FRAMEWORK_SCENE_H
 #define SDL_FRAMEWORK_SCENE_H
 
-#include <Box2D/Box2D.h>
+#include "Box2D/Box2D.h"
 #include "SDLDebugDraw.h"
 
 class Scene {

@@ -2,7 +2,7 @@
 // Created by moritz on 22.08.15.
 //
 
-#include <SDL2_gfxPrimitives.h>
+#include "sdl2_gfx/SDL2_gfxPrimitives.h"
 #include "SDLDebugDraw.h"
 #include "App.h"
 

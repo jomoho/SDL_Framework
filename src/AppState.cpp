@@ -80,9 +80,11 @@ void AppState::draw(){
 
     SDL_SetRenderDrawColor(r->renderer, 255, 155, 0, 255);
 }
+
 void AppState::next(int branch){
 	App::get()->nextState(branch);
 }
+
 void AppState::pump(const SDL_Event &event){
     if( event.type == SDL_KEYDOWN )
     {

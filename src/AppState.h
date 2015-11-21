@@ -16,22 +16,19 @@
 #include <string>
 #include "RendererSDL.h"
 #include "Scene.h"
-
 class App;
 
 class AppState {
-	friend class App; 	
-protected:
-    double timer;
 public:
+
+    double timer;
     Scene s;
 	std::string name;
-	virtual AppState * getNext(int branch);
+	AppState * getNext(int branch);
 	AppState();
-	virtual ~AppState();
-	virtual void draw();
-	virtual void pump(const SDL_Event &event);
-
+	~AppState();
+	void draw();
+	void pump(const SDL_Event &event);
 	void next(int branch = 1);
 };
 
