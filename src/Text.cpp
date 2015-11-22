@@ -6,7 +6,7 @@
  */
 
 #include "Text.h"
-#include "App.h"
+#include "Game.h"
 
 Text::Text(const string &text, SDL_Color color, int font_id,
 		TextRenderType type) {
@@ -21,7 +21,7 @@ Text::Text(const string &text, SDL_Color color, int font_id,
 	updateTexture();
 }
 Text::Text() {
-	Text("", App::white);
+	Text("", Game::white);
 }
 
 Text::~Text() {
@@ -63,7 +63,7 @@ void Text::drawLeft(int x, int y, double scale, double angle) {
 		return ;
 	}
 	SDL_Rect dest_rect = { x, y,(int) (src_rect.w * scale),(int) (src_rect.h * scale) };
-	SDL_RenderCopyEx(App::get()->ren->renderer, tex, &src_rect, &dest_rect,
+	SDL_RenderCopyEx(Game::get()->platformSDL->sdlRenderer, tex, &src_rect, &dest_rect,
 			angle, NULL, SDL_FLIP_NONE);
 }
 
@@ -73,7 +73,7 @@ void Text::drawRight(int x, int y, double scale) {
 	}
 	SDL_Rect dest_rect = {(int) (x - src_rect.w * scale),(int) (y - src_rect.h * scale),
 			(int) (src_rect.w * scale), (int) (src_rect.h * scale)};
-	SDL_RenderCopyEx(App::get()->ren->renderer, tex, &src_rect, &dest_rect, 0,
+	SDL_RenderCopyEx(Game::get()->platformSDL->sdlRenderer, tex, &src_rect, &dest_rect, 0,
 	NULL, SDL_FLIP_NONE);
 }
 
@@ -85,7 +85,7 @@ void Text::drawCenter(int x, int y, double scale) {
 		(int) (x - src_rect.w * scale * 0.5),
 		(int) (y - src_rect.h * scale * 0.5),
 		(int) (src_rect.w * scale), (int) (src_rect.h * scale)};
-	SDL_RenderCopyEx(App::get()->ren->renderer, tex, &src_rect, &dest_rect, 0,
+	SDL_RenderCopyEx(Game::get()->platformSDL->sdlRenderer, tex, &src_rect, &dest_rect, 0,
 	NULL, SDL_FLIP_NONE);
 }
 
@@ -99,7 +99,7 @@ void Text::updateTexture() {
 		SDL_DestroyTexture(tex);
 	}
 
-    TTF_Font *font = App::get()->fonts[font_id];
+    TTF_Font *font = Game::getAssets()->fonts[font_id];
 	SDL_Surface * srf = 0;
 
 	if (type == TXT_BLEND) {
@@ -122,7 +122,7 @@ void Text::updateTexture() {
 	src_rect.w = w;
 	src_rect.h = h;
 
-	tex = SDL_CreateTextureFromSurface(App::get()->ren->renderer, srf);
+	tex = SDL_CreateTextureFromSurface(Game::get()->platformSDL->sdlRenderer, srf);
 
 	if(tex == 0){
 		FILE_LOG(logERROR) << "SDL_CreateTextureFromSurface" << SDL_GetError();

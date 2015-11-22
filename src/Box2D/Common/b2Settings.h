@@ -26,14 +26,7 @@
 #define B2_NOT_USED(x) ((void)(x))
 #define b2Assert(A) assert(A)
 
-typedef signed char	int8;
-typedef signed short int16;
-typedef signed int int32;
-typedef unsigned char uint8;
-typedef unsigned short uint16;
-typedef unsigned int uint32;
-typedef float float32;
-typedef double float64;
+#include "framework.h"
 
 #define	b2_maxFloat		FLT_MAX
 #define	b2_epsilon		FLT_EPSILON

@@ -5,29 +5,39 @@
 #ifndef SDL_FRAMEWORK_SPRITE_H
 #define SDL_FRAMEWORK_SPRITE_H
 
-#include "RendererSDL.h"
-typedef Uint32 uint;
+#include "PlatformSDL.h"
+
 struct DrawMod {
     uint8_t r,g,b, alpha;
     SDL_BlendMode blend;
 };
 
-class Sprite {
-private:
-    DrawMod mod;
-    void applyMod(Texture *tex);
-public:
+struct sprite_definition{
+    char name [32];
+    uint32 texture_id;
+    Rect src_rect;
+};
 
-    uint textureId;
+struct sprite_atlas{
+    uint32 count;
+    sprite_definition *definitions;
+    int32 load(char * filename);
+};
+
+struct Sprite {
+
+    //DrawMod mod;
+    //void applyMod(Texture *tex);
+
+    uint32 textureId;
     Rect srcRect;
     Point pivot;
-    double angle;
-    double scale;
-    Sprite(uint id);
-    virtual ~Sprite();
 
-    void draw(int x, int y);
-    void draw(int x, int y, double angle, double scale);
+    Sprite(uint32 id);
+    void draw(int32 x, int32 y, float32 angle, float32 scale);
+
+    void drawStraight(uint32 x, uint32 y);
+    void drawStraight333(uint32 x, uint32 y);
 };
 
 

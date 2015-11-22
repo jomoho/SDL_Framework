@@ -6,23 +6,21 @@
 //============================================================================
 
 #include <iostream>
-#include "RendererSDL.h"
-#include "App.h"
+#include "PlatformSDL.h"
+#include "Game.h"
 
 using namespace std;
 
 int main(int argc, char** argv) {
-	App *app = App::get();
+	Game *app = Game::get();
 
-	app->start();
-
-
+	app->startup();
 
 	while(!app->quit)  // Enter main loop.
 	{
 		app->run();
 	 }
 
-	App::destroyInstance();
+	Game::destroyInstance();
 	return 0;
 }

@@ -14,7 +14,7 @@
 #endif
 
 #include <string>
-#include "RendererSDL.h"
+#include "PlatformSDL.h"
 
 using namespace std;
 

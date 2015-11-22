@@ -22,7 +22,7 @@ class AppState {
 public:
 
     double timer;
-    Scene s;
+   // Scene s;
 	std::string name;
 	AppState * getNext(int branch);
 	AppState();

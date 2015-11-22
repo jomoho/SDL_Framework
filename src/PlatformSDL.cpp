@@ -1,13 +1,13 @@
 /*
- * Renderer.cpp
+ * PlatformSDL.cpp
  *
  *  Created on: Aug 24, 2013
  *      Author: moritz
  */
 
-#include "RendererSDL.h"
+#include "PlatformSDL.h"
 
-RendererSDL::RendererSDL(const string &title, Uint32 width, Uint32 height, bool fullscreen) {
+PlatformSDL::PlatformSDL(const string &title, uint32 width, uint32 height, bool fullscreen) {
     frames = 0;
     this->width = width;
     this->height = height;
@@ -28,47 +28,47 @@ RendererSDL::RendererSDL(const string &title, Uint32 width, Uint32 height, bool 
     }
 
 
-    // Create a window
-    window = SDL_CreateWindow(
+    // Create a sdlWindow
+    sdlWindow = SDL_CreateWindow(
             title.c_str() ,
             SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
             width, height,
             windowflags);
 
-    if (window == NULL){
+    if (sdlWindow == NULL){
         FILE_LOG(logWARNING) << "SDL_CreateWindow Error: " << SDL_GetError() << endl;
     }
 
-    renderer = SDL_CreateRenderer(
-            window, -1,
+    sdlRenderer = SDL_CreateRenderer(
+            sdlWindow, -1,
             SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-    if (renderer == NULL){
+    if (sdlRenderer == NULL){
         FILE_LOG(logWARNING) << "SDL_CreateRenderer Error: " << SDL_GetError() << endl;
     }
 }
 
-RendererSDL::~RendererSDL() {
+PlatformSDL::~PlatformSDL() {
 
-    // Done! Close the window, clean-up and exit the program.
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
+    // Done! Close the sdlWindow, clean-up and exit the program.
+    SDL_DestroyRenderer(sdlRenderer);
+    SDL_DestroyWindow(sdlWindow);
     SDL_Quit();
 }
 
-const string& RendererSDL::getTitle() {
+const string&PlatformSDL::getTitle() {
     return title;
 }
 
-void RendererSDL::setTitle(const string& title) {
+void PlatformSDL::setTitle(const string& title) {
     this->title = title;
 }
 
-void RendererSDL::startFrame() {
-    SDL_RenderClear(renderer);
+void PlatformSDL::startFrame() {
+    SDL_RenderClear(sdlRenderer);
 }
 
-void RendererSDL::endFrame() {
-    SDL_RenderPresent(renderer);
+void PlatformSDL::endFrame() {
+    SDL_RenderPresent(sdlRenderer);
 
     t_last = t_now;
     t_now = std::chrono::high_resolution_clock::now();

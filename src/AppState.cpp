@@ -13,8 +13,8 @@
 
 AppState::AppState(): timer(0){
     App::get()->audio.playMusic(0);
-    s.debugDraw.camera = Camera(App::get()->ren->width, App::get()->ren->height);
-
+    //s.debugDraw.camera = Camera(App::get()->ren->width, App::get()->ren->height);
+/*
     // Define the ground body.
     b2BodyDef groundBodyDef;
     groundBodyDef.position.Set(0.0f, -10.0f);
@@ -55,7 +55,7 @@ AppState::AppState(): timer(0){
     fixtureDef.friction = 0.3f;
 
     // Add the shape to the body.
-    body->CreateFixture(&fixtureDef);
+    body->CreateFixture(&fixtureDef);*/
 }
 
 AppState::~AppState() {
@@ -67,17 +67,16 @@ void AppState::draw(){
 
 	Sprite spr(0);
     spr.pivot ={150,250};
-    spr.angle = r->time*6;
-    spr.draw(r->width/2,r->height/2);
+    spr.draw(r->width/2,r->height/2,r->time*6,1.0);
 
     Text t("Some Text!!!", {0, 150, 255});
 
     t.drawCenter(r->width / 2, r->height / 4, 2.0);
 
-
+/*
     s.update(r->deltaTime);
     s.world->DrawDebugData();
-
+*/
     SDL_SetRenderDrawColor(r->renderer, 255, 155, 0, 255);
 }
 
@@ -99,5 +98,10 @@ void AppState::pump(const SDL_Event &event){
 }
 
 AppState *AppState::getNext(int branch) {
-    return nullptr;
+    switch(branch){
+        default:
+        {
+            return NULL;
+        }
+    }
 }

@@ -30,7 +30,7 @@ Andreas Schiffler -- aschiffler at ferzkopp dot net
 #ifndef _SDL2_gfxPrimitives_h
 #define _SDL2_gfxPrimitives_h
 
-#include <math.h>
+#include "math2d.h"
 #ifndef M_PI
 #define M_PI	3.1415926535897932384626433832795
 #endif

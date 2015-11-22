@@ -29,7 +29,6 @@ Andreas Schiffler -- aschiffler at ferzkopp dot net
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
 #include <string.h>
 
 #include "SDL2_gfxPrimitives.h"
