@@ -28,6 +28,8 @@ void Assets::loadInit(){
     FILE_LOG(logDEBUG) << "Textures Loaded!";
     loadFilesAudio();
     FILE_LOG(logDEBUG) << "Audio Loaded!";
+    loadAtlases();
+    FILE_LOG(logDEBUG) << "Atlases Loaded!";
 }
 
 void Assets::destroyAudio() {
@@ -81,7 +83,7 @@ void Assets::freeFonts() {
     for (vector<TTF_Font*>::size_type i = 0; i < fonts.size(); ++i) {
         TTF_CloseFont(fonts[i]);
     }
-    fonts.empty();
+    fonts.clear();
     TTF_Quit();
 }
 
@@ -107,20 +109,33 @@ void Assets::freeTextures() {
     for (vector<Texture*>::size_type i = 0; i < textures.size(); ++i) {
         SDL_DestroyTexture(textures[i]);
     }
-    textures.empty();
+    textures.clear();
 }
 
 void Assets::freeAll() {
     freeTextures();
     freeFonts();
     destroyAudio();
+    atlases.clear();
 }
 
 int32 Assets::getTextureId(string fn) {
+    string dirfn = ASSET_GFX_DIR;
+    dirfn.append(fn);
     for(int32 i =0; i < textureDefinitions.size(); i++){
-        if (textureDefinitions[i] == fn){
+        if (textureDefinitions[i] == fn || textureDefinitions[i] == dirfn){
             return i;
         }
     }
     return -1;
+}
+
+void Assets::loadAtlases() {
+    for(auto it = atlasDefinitions.begin(); it != atlasDefinitions.end(); ++it){
+        SpriteAtlas atlas;
+        if(atlas.loadFile(*it) != 0){
+            FILE_LOG(logWARNING) << "Error loading Sprite Atlas: " <<*it;
+        }
+        atlases.push_back(atlas);
+    }
 }

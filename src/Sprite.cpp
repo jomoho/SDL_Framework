@@ -2,10 +2,12 @@
 // Created by moritz on 20.08.15.
 //
 
+#include <fstream>
 #include "Sprite.h"
 #include "Game.h"
+#include "picojson.h"
 
-Sprite::Sprite(uint32 id) {
+Sprite::Sprite(uint16 id) {
     if(Game::getAssets()->textures.size() <= id){
         FILE_LOG(logERROR) << "Texture ID Error: " << id;
         id= 0;
@@ -20,17 +22,27 @@ Sprite::Sprite(uint32 id) {
     //mod = {255, 255, 255, 255, SDL_BLENDMODE_BLEND};
 }
 
+Sprite::Sprite() {
 
+    textureId = 0;
+    pivot = {0,0};
+    srcRect = {0,0, 32,32};
 
-void Sprite::draw(int32 x, int32 y, float32 angle, float32 scale) {
+    //mod = {255, 255, 255, 255, SDL_BLENDMODE_BLEND};
+}
 
-    Point scaledPivot = {(int32) (pivot.x * scale),
-                         (int32) (pivot.y * scale)};
-    Rect destRect = {
-            x - scaledPivot.x,
-            y - scaledPivot.y,
-            (int32)(srcRect.w * scale),
-            (int32)(srcRect.h * scale)};
+void Sprite::draw(int32 x, int32 y, float32 angle) {
+
+    if(flags & SPRITE_FLAG_UPDATE_DEST){
+        flags ^= SPRITE_FLAG_UPDATE_DEST;
+        destRect.w = srcRect.w * scale;
+        destRect.h = srcRect.h * scale;
+    }
+
+    Point scaledPivot = {(int32) (pivot.x * destRect.w),
+                         (int32) (pivot.y * destRect.h)};
+    destRect.x = x - scaledPivot.x;
+    destRect.y = y - scaledPivot.y;
 
 
     //applyMod(app->textures[textureId]);
@@ -48,8 +60,8 @@ void Sprite::applyMod(Texture *tex) {
  */
 void Sprite::drawStraight(uint32 x, uint32 y) {
     Rect destRect = {
-            x,
-            y,
+            (int32) x,
+            (int32) y,
             (int32)(srcRect.w ),
             (int32)(srcRect.h )};
     SDL_RenderCopy(Game::getSDLRenderer(),
@@ -74,4 +86,101 @@ void Sprite::drawStraight333(uint32 x, uint32 y) {
                        &destRect,1.0f ,&scaledPivot, SDL_FLIP_NONE);
     }
 
+}
+
+void SpriteAtlas::makeSprite(uint32 spriteId, Sprite *sprite) {
+    if(spriteId < definitions.size()){
+        sprite->pivot = definitions[spriteId].pivot;
+        sprite->textureId = definitions[spriteId].textureId;
+        sprite->srcRect = definitions[spriteId].srcRect;
+    }
+}
+
+int32 SpriteAtlas::getSpriteId(char *name) {
+    for (int32 i = 0; i < definitions.size() ; ++i) {
+        if(strcmp(name, definitions[i].name) == 0){
+            return i;
+        }
+    }
+    return -1;
+}
+
+int32 SpriteAtlas::parseJSONArray(string json) {
+    definitions.empty();
+    picojson::value v;
+    std::string err = picojson::parse(v, json);
+    if (! err.empty()) {
+        FILE_LOG(logERROR) <<"Error parsing JSON "<< err;
+        return -1;
+    }
+    if(v.is<picojson::object>()){
+        int32 textureId = 0;
+        picojson::object obj = v.get<picojson::object>();
+        //parse meta object
+        {
+            picojson::value metaValue = obj["meta"];
+            picojson::object meta = metaValue.get<picojson::object>();
+
+            string image = meta["image"].to_str();
+            textureId = Game::get()->assets.getTextureId(image);
+
+        }
+        //parse array
+        {
+            picojson::value arrayValue = obj["frames"];
+            picojson::array frames = arrayValue.get<picojson::array>();
+
+
+            picojson::array::iterator it;
+            for (it = frames.begin(); it != frames.end(); it++) {
+                SpriteDefinition sprite;
+                sprite.textureId = textureId;
+
+                picojson::object frame = it->get<picojson::object>();
+
+                //parse srcRect
+                {
+                    picojson::value rectValue = frame["frame"];
+                    picojson::object rect = rectValue.get<picojson::object>();
+
+                    sprite.srcRect.x = (int32) rect["x"].get<double>();
+                    sprite.srcRect.y = (int32) rect["y"].get<double>();
+                    sprite.srcRect.w = (int32) rect["w"].get<double>();
+                    sprite.srcRect.h = (int32) rect["h"].get<double>();
+                }
+
+                //parse Pivot
+                {
+                    picojson::value pValue = frame["pivot"];
+                    picojson::object p = pValue.get<picojson::object>();
+
+                    sprite.pivot.x = (float32) p["x"].get<double>();
+                    sprite.pivot.y = (float32) p["y"].get<double>();
+                }
+
+
+                //parse Name
+                {
+                    string name = frame["filename"].to_str();
+                    if(name.size()>= 31){
+                        name.resize(31);
+                    }
+                    strcpy(sprite.name, name.c_str());
+                }
+
+                //push back
+                definitions.push_back(sprite);
+            }
+        }
+    }
+    return 0;
+}
+
+int32 SpriteAtlas::loadFile(string filename) {
+    std::ifstream ifs(filename);
+    std::string content;
+    content.assign( (std::istreambuf_iterator<char>(ifs) ),
+                    (std::istreambuf_iterator<char>()    ) );
+
+    return parseJSONArray(content);
 }

@@ -10,9 +10,14 @@
 #include "Camera.h"
 
 struct Map {
+    uint16 width, height;
+    uint16 tile_width, tile_height;
+    uint16 tile_count;
+    uint16 atlas;
 
-    void load(std::string filename);
-    void save(std::string filename);
+    uint16 * tiles;
+    uint16 * map;
+
 
     void drawtiles(Camera cam );
 };

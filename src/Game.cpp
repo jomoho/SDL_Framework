@@ -12,9 +12,7 @@
 #include <typeinfo>
 #include <iomanip>
 #include "stringtools.h"
-
 #include "Game.h"
-
 #include "Text.h"
 
 #include "Assets.h"
@@ -118,18 +116,25 @@ void Game::eventPump(SDL_Event event) {
 }
 
 void Game::updateAndRender(float64 time) {
-
     auto platform = platformSDL;
 
     Sprite spr(0);
     spr.pivot ={150,250};
-        spr.drawStraight333(sin(platform->time)*45 +45, 12);
+    //spr.drawStraight333(sin(platform->time)*45 +45, 12);
 
-    Sprite player(1);
-    player.pivot = {32,32};
+    Sprite player;
+    player.pivot = {0.5,0.5};
+    player.scale = 2.0;
+    player.flags = Sprite::SPRITE_FLAG_UPDATE_DEST;
+
+
+    Game::assets.atlases[0].makeSprite(1, &player);
+
     vec2 pos = {platform->width/2.0f, platform->height/2.0f};
     vec2 dir = pos - input.mouse;
-    player.draw(pos.x,pos.y, dir.angle()-HALFPI, 1.0f);
+
+    player.draw(pos.x,pos.y, dir.angle()-HALFPI);
+
 
     if(input.mouseA){
 

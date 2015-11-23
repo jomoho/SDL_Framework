@@ -8,6 +8,7 @@
 
 #include <SDL_mixer.h>
 #include "PlatformSDL.h"
+#include "Sprite.h"
 #include<vector>
 
 struct FontDef{
@@ -15,6 +16,9 @@ struct FontDef{
     int size;
 };
 
+#define ASSET_FONT_DIR "fonts"
+#define ASSET_SOUND_DIR "sfx"
+#define ASSET_GFX_DIR "gfx/"
 
 struct Assets {
     vector<string> sfxFiles = {
@@ -31,13 +35,20 @@ struct Assets {
 
     vector<string> textureDefinitions = {
             "gfx/demo.png",
-            "gfx/1.png"
+            "gfx/1.png",
+            "gfx/32.png",
+            "gfx/pack.png"
+    };
+
+    vector<string> atlasDefinitions = {
+            "gfx/pack.json"
     };
 
     vector<Mix_Chunk*> sfx;
     vector<Mix_Music*> music;
     vector<TTF_Font *> fonts;
     vector<Texture *> textures;
+    vector<SpriteAtlas> atlases;
 
     int32 getTextureId(string fn);
 
@@ -49,9 +60,10 @@ struct Assets {
     void loadTextures();
     void freeTextures();
 
-
     void loadFilesAudio();
     void destroyAudio();
+
+    void loadAtlases();
 
     void loadInit();
     void freeAll();
