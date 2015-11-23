@@ -6,21 +6,30 @@ add_definitions(${CMAKE_CXX_FLAGS} "-fpermissive")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11" )
 
 set(SOURCE_FILES
-    src/main.cpp
-        src/Game.cpp
-        src/Game.h
-    src/Log.h
-        src/PlatformSDL.cpp
-        src/PlatformSDL.h
-    src/Text.cpp
-    src/Text.h
-    src/Sprite.cpp
-    src/Sprite.h
-    src/Audio.cpp
-    src/Audio.h
+        #Third party Header files
+        src/picojson.h
 
-    src/Camera.cpp src/Camera.h
-        src/Entity.cpp src/Entity.h src/framework.h src/framework_math.h src/Map.cpp src/Map.h src/Assets.cpp src/Assets.h src/Input.cpp src/Input.h)
+        #main
+        src/main.cpp
+
+        #header files only
+        src/framework.h
+        src/framework_math.h
+        src/Log.h
+
+        # .cpp/.c files with corresponding .h files
+        src/Game.cpp src/Game.h
+        src/PlatformSDL.cpp src/PlatformSDL.h
+        src/Text.cpp src/Text.h
+        src/Sprite.cpp src/Sprite.h
+        src/Audio.cpp src/Audio.h
+        src/Camera.cpp src/Camera.h
+        src/Entity.cpp src/Entity.h
+        src/Map.cpp src/Map.h
+        src/Assets.cpp src/Assets.h
+        src/Input.cpp src/Input.h
+
+        )
 
 add_executable(SDL_Framework ${SOURCE_FILES})
 

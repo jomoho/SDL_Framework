@@ -6,19 +6,25 @@
 #define SDL_FRAMEWORK_CAMERA_H
 
 
-#include <Box2D/Common/b2Math.h>
+#include "framework.h"
+#include "framework_math.h"
 
-class Camera {
-public:
-    Camera();
-    Camera(float w, float h);
-    Camera(Camera & cam);
-    float screenWidth, screenHeight;
-    b2Vec2 scale = b2Vec2(10,10);
-    b2Vec2 pos= b2Vec2(0,0);
-    float angle=0;
+/**
+ * The camera center is the screen center
+ * by moving the position
+ */
+struct Camera {
+
+    float32 screenWidth, screenHeight;
+    vec2 positionWorld, positionScreen;
+    float32 zoom;
+    float32 angle;
+
+    vec2 screenToWorld(vec2 screen_pos);
+    vec2 worldToScreen(vec2 world_pos);
+
+    Camera(float32 w, float32 h);
+
 };
-
-b2Vec2& operator*=(b2Vec2 &v, const Camera &cam);
 
 #endif //SDL_FRAMEWORK_CAMERA_H

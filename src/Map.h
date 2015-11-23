@@ -12,14 +12,14 @@
 struct Map {
     uint16 width, height;
     uint16 tile_width, tile_height;
-    uint16 tile_count;
     uint16 atlas;
-
-    uint16 * tiles;
     uint16 * map;
 
+    Map(uint16 w, uint16 h);
 
-    void drawtiles(Camera cam );
+    void drawTiles(Camera *cam);
+    uint16 get(uint16 x, uint16_t y);
+    void drawTile(uint16 tileId, vec2 pos, float scale, float angle);
 };
 
 

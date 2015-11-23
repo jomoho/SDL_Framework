@@ -50,6 +50,15 @@ struct vec2{
     float32 length(){
         return sqrtf( x*x + y*y);
     };
+    void rotate(float32 angle){
+        float32 cs = cosf(angle);
+        float32 sn = sinf(angle);
+
+        float32 tx = x, ty = y;
+
+        x = tx * cs - ty * sn;
+        y = tx * sn + ty * cs;
+    }
  };
 
 

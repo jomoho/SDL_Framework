@@ -11,22 +11,23 @@
       <sourceFolder url="file://$MODULE_DIR$/src/Camera.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/Entity.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/Entity.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/framework.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/framework_math.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/Game.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/Game.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/Input.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/Input.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/Log.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/Map.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/Map.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/picojson.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/PlatformSDL.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/PlatformSDL.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/Sprite.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/Sprite.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/Text.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/Text.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/framework.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/framework_math.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/main.cpp" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
@@ -53,30 +54,31 @@
           <root url="file://$MODULE_DIR$/src" />
         </SOURCES>
         <excluded>
-          <root url="file://$MODULE_DIR$/src/Entity.cpp" />
-          <root url="file://$MODULE_DIR$/src/Game.h" />
-          <root url="file://$MODULE_DIR$/src/Input.h" />
-          <root url="file://$MODULE_DIR$/src/Input.cpp" />
-          <root url="file://$MODULE_DIR$/src/Text.cpp" />
-          <root url="file://$MODULE_DIR$/src/Sprite.cpp" />
-          <root url="file://$MODULE_DIR$/src/Assets.h" />
-          <root url="file://$MODULE_DIR$/src/Assets.cpp" />
-          <root url="file://$MODULE_DIR$/src/Text.h" />
-          <root url="file://$MODULE_DIR$/src/framework_math.h" />
-          <root url="file://$MODULE_DIR$/src/Sprite.h" />
-          <root url="file://$MODULE_DIR$/src/Log.h" />
           <root url="file://$MODULE_DIR$/src/PlatformSDL.cpp" />
-          <root url="file://$MODULE_DIR$/src/PlatformSDL.h" />
-          <root url="file://$MODULE_DIR$/src/Map.h" />
-          <root url="file://$MODULE_DIR$/src/Map.cpp" />
           <root url="file://$MODULE_DIR$/src/Camera.h" />
-          <root url="file://$MODULE_DIR$/src/Camera.cpp" />
-          <root url="file://$MODULE_DIR$/src/Audio.h" />
-          <root url="file://$MODULE_DIR$/src/Audio.cpp" />
-          <root url="file://$MODULE_DIR$/src/Game.cpp" />
+          <root url="file://$MODULE_DIR$/src/picojson.h" />
+          <root url="file://$MODULE_DIR$/src/Sprite.cpp" />
+          <root url="file://$MODULE_DIR$/src/Text.cpp" />
           <root url="file://$MODULE_DIR$/src/main.cpp" />
+          <root url="file://$MODULE_DIR$/src/Game.h" />
+          <root url="file://$MODULE_DIR$/src/Map.h" />
+          <root url="file://$MODULE_DIR$/src/Assets.cpp" />
+          <root url="file://$MODULE_DIR$/src/Audio.cpp" />
+          <root url="file://$MODULE_DIR$/src/Assets.h" />
+          <root url="file://$MODULE_DIR$/src/Sprite.h" />
+          <root url="file://$MODULE_DIR$/src/Input.cpp" />
           <root url="file://$MODULE_DIR$/src/framework.h" />
+          <root url="file://$MODULE_DIR$/src/Log.h" />
+          <root url="file://$MODULE_DIR$/src/Input.h" />
+          <root url="file://$MODULE_DIR$/src/Audio.h" />
+          <root url="file://$MODULE_DIR$/src/Text.h" />
           <root url="file://$MODULE_DIR$/src/Entity.h" />
+          <root url="file://$MODULE_DIR$/src/PlatformSDL.h" />
+          <root url="file://$MODULE_DIR$/src/framework_math.h" />
+          <root url="file://$MODULE_DIR$/src/Game.cpp" />
+          <root url="file://$MODULE_DIR$/src/Entity.cpp" />
+          <root url="file://$MODULE_DIR$/src/Map.cpp" />
+          <root url="file://$MODULE_DIR$/src/Camera.cpp" />
         </excluded>
       </library>
     </orderEntry>
