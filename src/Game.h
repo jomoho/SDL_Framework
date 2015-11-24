@@ -15,6 +15,7 @@
 #include "Entity.h"
 #include "Assets.h"
 #include "Input.h"
+#include "Map.h"
 
 #define GAME_TITLE "FRAMEWORK DEMO"
 #define GAME_WIDTH 640
@@ -31,6 +32,11 @@ struct Game {
     Assets assets;
     Input input;
 
+    Map *map;
+    Camera camera;
+
+
+    Game();
     static Assets * getAssets();
     static SDL_Renderer *getSDLRenderer();
     static SDL_Color black, white, red, green, blue;

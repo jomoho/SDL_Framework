@@ -22,9 +22,9 @@ struct Camera {
 
     vec2 screenToWorld(vec2 screen_pos);
     vec2 worldToScreen(vec2 world_pos);
-
     Camera(float32 w, float32 h);
 
+    void drawDebug();
 };
 
 #endif //SDL_FRAMEWORK_CAMERA_H

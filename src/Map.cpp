@@ -24,11 +24,14 @@ void Map::drawTiles(Camera *cam) {
     sprite.scale = cam->zoom;
     sprite.flags = Sprite::SPRITE_FLAG_UPDATE_DEST;
 
-    for (int y = ttl_y; y < tbr_y; ++y) {
-        for (int x = ttl_x; x < tbr_x; ++x) {
+    float32 ztw = tile_width;
+    float32 zth = tile_height;
+
+    for (int y = 0; y < height; ++y) {
+        for (int x = 0; x < width; ++x) {
 
             //draw each tile with appropriate offset, rotation and scale
-            vec2 pos = cam->worldToScreen({x*tile_width, y*tile_height});
+            vec2 pos = cam->worldToScreen({x*ztw, y*zth});
             Game::get()->assets.atlases[atlas].makeSprite(get(x,y), &sprite);
             sprite.draw((int32) pos.x, (int32) pos.y, -cam->angle);
         }
@@ -47,5 +50,28 @@ uint16 Map::get(uint16 x, uint16_t y) {
 }
 
 void Map::drawTile(uint16 tileId, vec2 pos, float scale, float angle) {
+    Sprite s;
+    Game::get()->assets.atlases[atlas].makeSprite(tileId, &s);
+    s.scale = scale;
+    s.flags |= Sprite::SPRITE_FLAG_UPDATE_DEST;
+    s.draw(pos, angle);
+}
 
+Map::Map(uint16 w, uint16 h) {
+    width = w;
+    height = h;
+    tile_width = 47;
+    tile_height = 47;
+
+    atlas = 0;
+
+    map = new uint16[w*h];
+    for (int i = 0; i <(w*h) ; ++i) {
+        map[i] = 0;
+
+    }
+}
+
+Map::~Map() {
+    delete map;
 }

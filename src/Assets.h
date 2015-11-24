@@ -37,7 +37,8 @@ struct Assets {
             "gfx/demo.png",
             "gfx/1.png",
             "gfx/32.png",
-            "gfx/pack.png"
+            "gfx/pack.png",
+            "gfx/tile_floor.png"
     };
 
     vector<string> atlasDefinitions = {

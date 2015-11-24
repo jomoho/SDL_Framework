@@ -49,6 +49,7 @@ struct Sprite {
     Sprite(uint16 id);
     Sprite();
     void draw(int32 x, int32 y, float32 angle);
+    void draw(vec2 pos, float32 angle);
 
     void drawStraight(uint32 x, uint32 y);
     void drawStraight333(uint32 x, uint32 y);

@@ -184,3 +184,7 @@ int32 SpriteAtlas::loadFile(string filename) {
 
     return parseJSONArray(content);
 }
+
+void Sprite::draw(vec2 pos, float32 angle) {
+    draw((int32) pos.x, (int32) pos.y, angle);
+}

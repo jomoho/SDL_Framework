@@ -77,25 +77,25 @@ inline vec2 operator-(vec2 a, vec2 b){
     return result;
 }
 
-inline vec2 operator+=(vec2 a, vec2 b){
+inline vec2 operator+=(vec2& a, vec2 b){
     a.x += b.x;
     a.y += b.y;
     return a;
 }
 
-inline vec2 operator-=(vec2 a, vec2 b){
+inline vec2 operator-=(vec2& a, vec2 b){
     a.x -= b.x;
     a.y -= b.y;
     return a;
 }
 
-inline vec2 operator*=(vec2 a, float32 s){
+inline vec2 operator*=(vec2& a, float32 s){
     a.x *= s;
     a.y *= s;
     return a;
 }
 
-inline vec2 operator/=(vec2 a, float32 s){
+inline vec2 operator/=(vec2& a, float32 s){
     a.x /= s;
     a.y /= s;
     return a;

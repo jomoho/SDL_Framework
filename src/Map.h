@@ -16,6 +16,7 @@ struct Map {
     uint16 * map;
 
     Map(uint16 w, uint16 h);
+    ~Map();
 
     void drawTiles(Camera *cam);
     uint16 get(uint16 x, uint16_t y);

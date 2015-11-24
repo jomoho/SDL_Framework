@@ -25,12 +25,43 @@ SDL_Color Game::blue = {0, 0, 255};
 
 #define _DEBUG 1
 
+
+void Game::startup(){
+#ifdef _DEBUG
+    debug = true;
+    FILELog::ReportingLevel() = logDEBUG3;
+#else
+    debug = false;
+	FILELog::ReportingLevel() = logWARNING;
+#endif
+
+    FILE* log_fd = fopen("logfile.txt", "w");
+    Output2FILE::Stream() = log_fd;
+
+    platformSDL = new PlatformSDL(GAME_TITLE, GAME_WIDTH, GAME_HEIGHT);
+    quit = false;
+    audio.init();
+    assets.loadInit();
+
+    map = new Map(16,16);
+    camera.screenWidth = (float32) platformSDL->width;
+    camera.screenHeight = (float32) platformSDL->height;
+    camera.positionScreen = vec2(camera.screenWidth /2,
+                                 camera.screenHeight /2);
+    /*
+    camera.positionWorld = vec2(
+            map->tile_width*map->width/2,
+            map->tile_height* map->height/2);
+    */
+
+}
 void Game::tearDown() {
     assets.freeAll();
 
 	SDL_StopTextInput();
 	TTF_Quit();
 
+    delete map;
 	delete platformSDL;
 }
 
@@ -51,25 +82,6 @@ void Game::destroyInstance() {
 	instance = 0;
 }
 
-void Game::startup(){
-#ifdef _DEBUG
-    debug = true;
-    FILELog::ReportingLevel() = logDEBUG3;
-#else
-    debug = false;
-	FILELog::ReportingLevel() = logWARNING;
-#endif
-
-    FILE* log_fd = fopen("logfile.txt", "w");
-    Output2FILE::Stream() = log_fd;
-
-    platformSDL = new PlatformSDL(GAME_TITLE, GAME_WIDTH, GAME_HEIGHT);
-    quit = false;
-    audio.init();
-    assets.loadInit();
-
-}
-
 void Game::drawDebug(){
 	stringstream s;
 
@@ -82,6 +94,7 @@ void Game::drawDebug(){
     << " mouse: " << (int32) input.mouse.x <<", "<<(int32) input.mouse.y <<": "<<dir.angle() ;
 	Text txt(s.str(), white);
 	txt.drawLeft(16, 16, 1.0);
+    camera.drawDebug();
 }
 
 void Game::run() {
@@ -118,24 +131,42 @@ void Game::eventPump(SDL_Event event) {
 void Game::updateAndRender(float64 time) {
     auto platform = platformSDL;
 
+    map->drawTiles(&camera);
     Sprite spr(0);
     spr.pivot ={150,250};
     //spr.drawStraight333(sin(platform->time)*45 +45, 12);
 
-    Sprite player;
+    Sprite player(2);
     player.pivot = {0.5,0.5};
     player.scale = 2.0;
     player.flags = Sprite::SPRITE_FLAG_UPDATE_DEST;
 
-
-    Game::assets.atlases[0].makeSprite(1, &player);
 
     vec2 pos = {platform->width/2.0f, platform->height/2.0f};
     vec2 dir = pos - input.mouse;
 
     player.draw(pos.x,pos.y, dir.angle()-HALFPI);
 
+    camera.zoom = 1.0f + 0.5f*sin(platform->time);
 
+    if(input.left){
+        camera.positionWorld.x --;
+    }
+    if(input.right){
+        camera.positionWorld.x ++;
+    }
+
+    if(input.up){
+        camera.positionWorld.y --;
+    }
+    if(input.down){
+        camera.positionWorld.y ++;
+    }
+
+    if(input.mouseB) {
+        camera.angle += 0.1;
+
+    }
     if(input.mouseA){
 
         SDL_SetRenderDrawColor(getSDLRenderer(), 0, 0, 0, 255);
@@ -196,4 +227,11 @@ SDL_Renderer *Game::getSDLRenderer() {
 
 Assets* Game::getAssets() {
     return &(instance->assets);
+}
+
+Game::Game(): camera( (float32) GAME_WIDTH, (float32) GAME_HEIGHT) {
+    map = 0;
+    platformSDL = 0;
+    quit = false;
+    debug = false;
 }
