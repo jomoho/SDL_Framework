@@ -132,14 +132,14 @@ void Game::updateAndRender(float64 time) {
     auto platform = platformSDL;
 
     map->drawTiles(&camera);
-    Sprite spr(0);
+    Frame spr(0);
     spr.pivot ={150,250};
     //spr.drawStraight333(sin(platform->time)*45 +45, 12);
 
-    Sprite player(2);
+    Frame player(2);
     player.pivot = {0.5,0.5};
     player.scale = 2.0;
-    player.flags = Sprite::SPRITE_FLAG_UPDATE_DEST;
+    player.flags = Frame::SPRITE_FLAG_UPDATE_DEST;
 
 
     vec2 pos = {platform->width/2.0f, platform->height/2.0f};

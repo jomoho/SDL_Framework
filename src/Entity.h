@@ -8,7 +8,7 @@
 
 #include <vector>
 #include "framework_math.h"
-#include "Sprite.h"
+#include "Frame.h"
 #include "Game.h"
 
 enum EntityType{
@@ -19,7 +19,7 @@ struct Entity {
     EntityType type;
     uint32 flags;
     vec2 pos;
-    Sprite * sprite;
+    Frame * sprite;
 
     static Entity* make(EntityType which, void * where){
         Entity* entity = (Entity*) where;

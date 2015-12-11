@@ -20,9 +20,9 @@ void Map::drawTiles(Camera *cam) {
     uint16 tbr_y = MAX( MIN(bottomRightW.y/tile_height, height), 0);
 
     //raster camera rect in map space
-    Sprite sprite;
+    Frame sprite;
     sprite.scale = cam->zoom;
-    sprite.flags = Sprite::SPRITE_FLAG_UPDATE_DEST;
+    sprite.flags = Frame::SPRITE_FLAG_UPDATE_DEST;
 
     float32 ztw = tile_width;
     float32 zth = tile_height;
@@ -31,14 +31,11 @@ void Map::drawTiles(Camera *cam) {
         for (int x = 0; x < width; ++x) {
 
             //draw each tile with appropriate offset, rotation and scale
-            vec2 pos = cam->worldToScreen({x*ztw, y*zth});
-            Game::get()->assets.atlases[atlas].makeSprite(get(x,y), &sprite);
+            vec2 pos = cam->worldToScreen({x * ztw, y * zth});
+            Game::get()->assets.atlases[atlas].makeFrame(get(x, y), &sprite);
             sprite.draw((int32) pos.x, (int32) pos.y, -cam->angle);
         }
-        
     }
-
-
 }
 
 uint16 Map::get(uint16 x, uint16_t y) {
@@ -50,10 +47,10 @@ uint16 Map::get(uint16 x, uint16_t y) {
 }
 
 void Map::drawTile(uint16 tileId, vec2 pos, float scale, float angle) {
-    Sprite s;
-    Game::get()->assets.atlases[atlas].makeSprite(tileId, &s);
+    Frame s;
+    Game::get()->assets.atlases[atlas].makeFrame(tileId, &s);
     s.scale = scale;
-    s.flags |= Sprite::SPRITE_FLAG_UPDATE_DEST;
+    s.flags |= Frame::SPRITE_FLAG_UPDATE_DEST;
     s.draw(pos, angle);
 }
 

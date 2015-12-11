@@ -16,6 +16,7 @@
 #define PI 3.14159265359f
 #define HALFPI 1.57079632679f
 #define TWOPI 6.28318530718f
+
 inline float32 lerp(float32 a, float32 t, float32 b){
     float32 result = (1.0f - t) * a + t * b;
     return result;
@@ -40,6 +41,9 @@ struct vec2{
     void direction(float32 angle){
         x = cosf(angle);
         y = sinf(angle);
+    };
+    inline float32 dot(vec2 other){
+        return (x * other.y) - (y * other.x);
     };
     float32 angle(){
         return atan2f(y,x);
@@ -69,6 +73,11 @@ inline vec2 lerp2d(vec2 a, float32 t, vec2 b){
 
 inline vec2 operator+(vec2 a, vec2 b){
     vec2 result ={a.x + b.x, a.y + b.y};
+    return result;
+}
+
+inline vec2 operator*(vec2 a,float32 b){
+    vec2 result = {a.x * b, a.y * b};
     return result;
 }
 

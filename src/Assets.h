@@ -8,7 +8,7 @@
 
 #include <SDL_mixer.h>
 #include "PlatformSDL.h"
-#include "Sprite.h"
+#include "Frame.h"
 #include<vector>
 
 struct FontDef{

@@ -21,7 +21,7 @@ set(SOURCE_FILES
         src/Game.cpp src/Game.h
         src/PlatformSDL.cpp src/PlatformSDL.h
         src/Text.cpp src/Text.h
-        src/Sprite.cpp src/Sprite.h
+        src/Frame.cpp src/Frame.h
         src/Audio.cpp src/Audio.h
         src/Camera.cpp src/Camera.h
         src/Entity.cpp src/Entity.h
@@ -29,7 +29,7 @@ set(SOURCE_FILES
         src/Assets.cpp src/Assets.h
         src/Input.cpp src/Input.h
 
-        )
+        src/intersection_tests.h src/Sprite.cpp src/Sprite.h)
 
 add_executable(SDL_Framework ${SOURCE_FILES})
 

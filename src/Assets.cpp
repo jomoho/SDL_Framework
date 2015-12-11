@@ -134,7 +134,7 @@ void Assets::loadAtlases() {
     for(auto it = atlasDefinitions.begin(); it != atlasDefinitions.end(); ++it){
         SpriteAtlas atlas;
         if(atlas.loadFile(*it) != 0){
-            FILE_LOG(logWARNING) << "Error loading Sprite Atlas: " <<*it;
+            FILE_LOG(logWARNING) << "Error loading Frame Atlas: " <<*it;
         }
         atlases.push_back(atlas);
     }
